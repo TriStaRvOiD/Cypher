@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Cypher</string>
+    <string name="quick_tile_name">Cypher</string>
+
+    <string name="pick_image">Click to pick an image</string>
+    <string name="storage_permission">Local image scanning needs storage permission. Click to grant.</string>
+</resources>
