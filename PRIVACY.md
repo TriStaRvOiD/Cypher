@@ -1,0 +1,1 @@
+The app doesn't collect any data whatsoever. It doesn't even use the Internet permission. However, the app uses Google's ML Kit SDK for QR Scanning. You can read about their privacy and data practices here: https://developers.google.com/ml-kit/terms#privacy
