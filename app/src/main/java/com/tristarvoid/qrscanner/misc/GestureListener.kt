@@ -20,13 +20,22 @@ import androidx.core.content.ContextCompat.startActivity
 import com.tristarvoid.qrscanner.FileActivity
 import kotlin.math.abs
 
-class GestureListener(private val ctx: Context, private val camera: Camera) : GestureDetector.SimpleOnGestureListener() {
+class GestureListener(private val ctx: Context, private val camera: Camera) :
+    GestureDetector.SimpleOnGestureListener() {
     private val swipeThreshold = 100
     private val swipeVelocityThreshold = 100
-    private var isFlashEnabled: Boolean = false
 
     override fun onDown(e: MotionEvent): Boolean {
         return true
+    }
+
+    override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            if (camera.cameraInfo.torchState.value == 0 && camera.cameraInfo.hasFlashUnit())
+                camera.cameraControl.enableTorch(true)
+            else if (camera.cameraInfo.torchState.value == 1 && camera.cameraInfo.hasFlashUnit())
+                camera.cameraControl.enableTorch(false)
+        return super.onSingleTapConfirmed(e)
     }
 
     override fun onDoubleTap(e: MotionEvent): Boolean {
@@ -46,29 +55,15 @@ class GestureListener(private val ctx: Context, private val camera: Camera) : Ge
             val diffX = e2.x - e1.x
             if (abs(diffX) > abs(diffY)) {
                 if (abs(diffY) > swipeThreshold && abs(velocityY) > swipeVelocityThreshold) {
-                    if (diffY > 0)
-                        onDownwardSwipe()
-                    else
-                        onUpwardSwipe()
+                    //if (diffY > 0)
+                    //onDownwardSwipe()
+                    //else
+                    //onUpwardSwipe()
                 }
             }
         } catch (e: Exception) {
             e.printStackTrace()
         }
         return true
-    }
-
-    private fun onUpwardSwipe() {
-        if (camera.cameraInfo.hasFlashUnit() && !isFlashEnabled && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            camera.cameraControl.enableTorch(true)
-            isFlashEnabled = true
-        }
-    }
-
-    private fun onDownwardSwipe() {
-        if (camera.cameraInfo.hasFlashUnit() && isFlashEnabled && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            camera.cameraControl.enableTorch(false)
-            isFlashEnabled = false
-        }
     }
 }

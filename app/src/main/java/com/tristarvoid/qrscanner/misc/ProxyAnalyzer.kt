@@ -17,7 +17,7 @@ import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
 import com.tristarvoid.qrscanner.barcodesList
-import com.tristarvoid.qrscanner.fragments.BottomResultFragment
+import com.tristarvoid.qrscanner.presentation.fragments.BottomResultFragment
 import com.tristarvoid.qrscanner.isActive
 
 class ProxyAnalyzer(fragmentManager: FragmentManager) : ImageAnalysis.Analyzer {

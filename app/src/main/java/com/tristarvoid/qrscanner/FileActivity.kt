@@ -10,16 +10,20 @@
 
 package com.tristarvoid.qrscanner
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.View
+import android.util.Log
+import android.widget.Toast
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import com.google.mlkit.vision.barcode.BarcodeScanning
+import com.google.mlkit.vision.barcode.common.Barcode
+import com.google.mlkit.vision.common.InputImage
 import com.tristarvoid.qrscanner.databinding.ActivityFileBinding
-import com.tristarvoid.qrscanner.fragments.FileFragment
+import com.tristarvoid.qrscanner.presentation.fragments.BottomResultFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFileBinding
@@ -28,46 +32,48 @@ class FileActivity : AppCompatActivity() {
         binding = ActivityFileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val handler = registerForActivityResult(ActivityResultContracts.RequestPermission())
-        { isGranted ->
-            if (isGranted)
-                binding.storageText.text = getString(R.string.pick_image)
-        }
-
-        val launcher =
-            registerForActivityResult(
-                ActivityResultContracts.GetContent()
-            ) {
-                val thing = it
-                if (thing != null) {
-                    binding.storageText.visibility = View.INVISIBLE
-                    supportFragmentManager.beginTransaction()
-                        .replace(
-                            R.id.fragContainer,
-                            FileFragment(this, supportFragmentManager, thing)
-                        ).commit()
-                }
-            }
-
-        if (binding.storageText.text == "Checking...")
-            if (isStoragePermissionGranted())
-                binding.storageText.text = getString(R.string.pick_image)
-            else
-                binding.storageText.text = getString(R.string.storage_permission)
-
         binding.storageText.setOnClickListener {
-            if (!isStoragePermissionGranted())
-                handler.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-            else {
-                launcher.launch("image/*")
-            }
+            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
     }
 
-    private fun isStoragePermissionGranted(): Boolean {
-        return ContextCompat.checkSelfPermission(
-            baseContext,
-            Manifest.permission.READ_EXTERNAL_STORAGE
-        ) == PackageManager.PERMISSION_GRANTED
-    }
+    private val pickMedia =
+        registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            if (uri != null) {
+                Log.d("PhotoPicker", "Selected URI: $uri")
+                val img = InputImage.fromFilePath(this, uri)
+                val barcodeScanner = BarcodeScanning.getClient()
+                barcodeScanner.process(img)
+                    .addOnSuccessListener { barcodes ->
+                        barcodesList = barcodes.distinct().toMutableList()
+                        if (barcodesList.isNotEmpty()) {
+                            val iterator = barcodesList.iterator()
+                            while (iterator.hasNext()) {
+                                if (iterator.next().valueType != Barcode.TYPE_URL)
+                                    iterator.remove()
+                            }
+                            if (barcodesList.isNotEmpty()) {
+                                if (!supportFragmentManager.isDestroyed) {
+                                    BottomResultFragment().show(
+                                        supportFragmentManager,
+                                        BottomResultFragment().tag
+                                    )
+                                    isActive = true
+                                }
+                            } else
+                                Toast.makeText(this, "No QR detected", Toast.LENGTH_LONG).show()
+                        } else
+                            Toast.makeText(this, "No QR detected", Toast.LENGTH_LONG).show()
+                    }
+                    .addOnFailureListener {
+                        // Task failed with an exception
+                        // ...
+                    }
+                    .addOnCompleteListener {
+                        barcodeScanner.close()
+                    }
+            } else {
+                Log.d("PhotoPicker", "No media selected")
+            }
+        }
 }

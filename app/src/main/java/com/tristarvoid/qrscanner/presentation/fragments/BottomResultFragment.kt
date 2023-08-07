@@ -8,7 +8,7 @@
  * You should have received a copy of the GNU General Public License along with Cypher. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.tristarvoid.qrscanner.fragments
+package com.tristarvoid.qrscanner.presentation.fragments
 
 import android.content.Intent
 import android.net.Uri
@@ -17,12 +17,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.tristarvoid.qrscanner.misc.UrlScanner
 import com.tristarvoid.qrscanner.barcodesList
 import com.tristarvoid.qrscanner.databinding.FragmentBottomSheetBinding
+import com.tristarvoid.qrscanner.domain.ClipboardViewModel
+import com.tristarvoid.qrscanner.domain.ToastViewModel
 import com.tristarvoid.qrscanner.isActive
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BottomResultFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentBottomSheetBinding
     private var items: ArrayList<String?> = arrayListOf()
@@ -42,13 +46,19 @@ class BottomResultFragment : BottomSheetDialogFragment() {
                 items.add(theUrl)
         }
         binding.urlListView.setOnItemClickListener { _, _, position, _ ->
-            val urlScanner = UrlScanner(requireContext(), items[position])
-            urlScanner.execute()
-        }
-        binding.urlListView.setOnItemLongClickListener { _, _, position, _ ->
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse(items[position])
             startActivity(intent)
+        }
+        binding.urlListView.setOnItemLongClickListener { _, _, position, _ ->
+            val clipboardViewModel by lazy {
+                ViewModelProvider(this)[ClipboardViewModel::class.java]
+            }
+            val toastViewModel by lazy {
+                ViewModelProvider(this)[ToastViewModel::class.java]
+            }
+            clipboardViewModel.copyToClipboard(items[position])
+            toastViewModel.displayToast(message = "Copied to clipboard", length = 4)
             true
         }
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, items)
