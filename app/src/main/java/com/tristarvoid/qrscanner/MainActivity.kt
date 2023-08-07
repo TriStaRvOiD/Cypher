@@ -21,18 +21,24 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.camera.core.*
+import androidx.camera.core.Camera
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.tristarvoid.qrscanner.databinding.ActivityMainBinding
 import com.tristarvoid.qrscanner.misc.GestureListener
 import com.tristarvoid.qrscanner.misc.ProxyAnalyzer
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.Executors
 
 var isActive: Boolean = false
 lateinit var barcodesList: MutableList<Barcode>
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -58,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                 if (isGranted)
                     camSetup()
                 else {
-                    Toast.makeText(this, "Gib permission manually", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "This app won't work without camera permission", Toast.LENGTH_SHORT).show()
                     this.finishAffinity()
                 }
             }
