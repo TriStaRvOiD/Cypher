@@ -12,58 +12,30 @@ package com.tristarvoid.qrscanner.misc
 
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.view.GestureDetector
 import android.view.MotionEvent
 import androidx.camera.core.Camera
 import androidx.core.content.ContextCompat.startActivity
 import com.tristarvoid.qrscanner.FileActivity
-import kotlin.math.abs
 
-class GestureListener(private val ctx: Context, private val camera: Camera) :
+class GestureListener(private val context: Context, private val camera: Camera) :
     GestureDetector.SimpleOnGestureListener() {
-    private val swipeThreshold = 100
-    private val swipeVelocityThreshold = 100
 
     override fun onDown(e: MotionEvent): Boolean {
         return true
     }
 
     override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            if (camera.cameraInfo.torchState.value == 0 && camera.cameraInfo.hasFlashUnit())
-                camera.cameraControl.enableTorch(true)
-            else if (camera.cameraInfo.torchState.value == 1 && camera.cameraInfo.hasFlashUnit())
-                camera.cameraControl.enableTorch(false)
+        if (camera.cameraInfo.torchState.value == 0 && camera.cameraInfo.hasFlashUnit())
+            camera.cameraControl.enableTorch(true)
+        else if (camera.cameraInfo.torchState.value == 1 && camera.cameraInfo.hasFlashUnit())
+            camera.cameraControl.enableTorch(false)
         return super.onSingleTapConfirmed(e)
     }
 
     override fun onDoubleTap(e: MotionEvent): Boolean {
-        val intent = Intent(ctx, FileActivity::class.java)
-        startActivity(ctx, intent, null)
+        val intent = Intent(context, FileActivity::class.java)
+        startActivity(context, intent, null)
         return super.onDoubleTap(e)
-    }
-
-    override fun onFling(
-        e1: MotionEvent,
-        e2: MotionEvent,
-        velocityX: Float,
-        velocityY: Float
-    ): Boolean {
-        try {
-            val diffY = e2.y - e1.y
-            val diffX = e2.x - e1.x
-            if (abs(diffX) > abs(diffY)) {
-                if (abs(diffY) > swipeThreshold && abs(velocityY) > swipeVelocityThreshold) {
-                    //if (diffY > 0)
-                    //onDownwardSwipe()
-                    //else
-                    //onUpwardSwipe()
-                }
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return true
     }
 }
