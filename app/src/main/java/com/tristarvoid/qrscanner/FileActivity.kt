@@ -40,7 +40,6 @@ class FileActivity : AppCompatActivity() {
     private val pickMedia =
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             if (uri != null) {
-                Log.d("PhotoPicker", "Selected URI: $uri")
                 val img = InputImage.fromFilePath(this, uri)
                 val barcodeScanner = BarcodeScanning.getClient()
                 barcodeScanner.process(img)

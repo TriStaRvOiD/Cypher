@@ -10,17 +10,17 @@
 
 package com.tristarvoid.qrscanner.misc
 
-import android.os.Build
 import android.service.quicksettings.TileService
-import androidx.annotation.RequiresApi
 
-@RequiresApi(Build.VERSION_CODES.N)
 class QuickTileService : TileService() {
 
     override fun onClick() {
-        val launchIntent = packageManager.getLaunchIntentForPackage("com.tristarvoid.qrscanner")
-        if (launchIntent != null)
-            startActivityAndCollapse(launchIntent)
+        val packageName = "com.tristarvoid.qrscanner"
+        val packageManager = this.packageManager
+        val intent = packageManager.getLaunchIntentForPackage(packageName)
+        if (intent != null) {
+            this.startActivity(intent)
+        }
         super.onClick()
     }
 }

@@ -19,6 +19,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.tristarvoid.qrscanner.R
 import com.tristarvoid.qrscanner.barcodesList
 import com.tristarvoid.qrscanner.databinding.FragmentBottomSheetBinding
 import com.tristarvoid.qrscanner.domain.ClipboardViewModel
@@ -37,9 +38,9 @@ class BottomResultFragment : BottomSheetDialogFragment() {
     ): View {
         binding = FragmentBottomSheetBinding.inflate(inflater, container, false)
         if (barcodesList.size > 1)
-            binding.title.text = "Urls:"
+            binding.title.text = getString(R.string.bottom_fragment_header_text_multiple)
         else
-            binding.title.text = "Url:"
+            binding.title.text = getString(R.string.bottom_fragment_header_text_singular)
         for (barcode in barcodesList) {
             val theUrl = barcode.url?.url
             if (theUrl != null && theUrl != "")

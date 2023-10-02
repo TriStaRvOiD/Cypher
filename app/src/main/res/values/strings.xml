@@ -2,6 +2,8 @@
     <string name="app_name">Cypher</string>
     <string name="quick_tile_name">Cypher</string>
 
-    <string name="pick_image">Click to pick an image</string>
-    <string name="storage_permission">Local image scanning needs storage permission. Click to grant.</string>
+    <string name="bottom_fragment_header_text_singular">Url:</string>
+    <string name="bottom_fragment_header_text_multiple">Urls:</string>
+
+    <string name="pick_image">Tap to pick an image</string>
 </resources>
