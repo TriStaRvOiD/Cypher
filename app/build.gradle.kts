@@ -13,8 +13,8 @@ android {
         applicationId = "com.tristarvoid.qrscanner"
         minSdk = 24
         targetSdk = 34
-        versionCode = 3
-        versionName = "2.0.1"
+        versionCode = 4
+        versionName = "2.0.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -58,7 +58,7 @@ dependencies {
     implementation("com.google.mlkit:barcode-scanning:17.2.0")
 
     // CameraX
-    val cameraxVersion = "1.2.3"
+    val cameraxVersion = "1.3.0"
     implementation("androidx.camera:camera-camera2:${cameraxVersion}")
     implementation("androidx.camera:camera-lifecycle:${cameraxVersion}")
     implementation("androidx.camera:camera-video:${cameraxVersion}")
@@ -66,17 +66,17 @@ dependencies {
     implementation("androidx.camera:camera-extensions:${cameraxVersion}")
 
     //Material Design
-    implementation("com.google.android.material:material:1.9.0")
+    implementation("com.google.android.material:material:1.10.0")
 
     //Dagger hilt
-    implementation("com.google.dagger:hilt-android:2.48")
-    ksp("com.google.dagger:hilt-compiler:2.48")
-    implementation("androidx.hilt:hilt-common:1.0.0")
-    ksp("androidx.hilt:hilt-compiler:1.0.0")
+    implementation("com.google.dagger:hilt-android:2.48.1")
+    ksp("com.google.dagger:hilt-compiler:2.48.1")
+    implementation("androidx.hilt:hilt-common:1.1.0")
+    ksp("androidx.hilt:hilt-compiler:1.1.0")
 
     //Miscellaneous
     implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.activity:activity-ktx:1.7.2")
+    implementation("androidx.activity:activity-ktx:1.8.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.appcompat:appcompat:1.6.1")
