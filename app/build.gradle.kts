@@ -13,8 +13,8 @@ android {
         applicationId = "com.tristarvoid.qrscanner"
         minSdk = 24
         targetSdk = 34
-        versionCode = 4
-        versionName = "2.0.2"
+        versionCode = 5
+        versionName = "2.0.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -44,7 +44,7 @@ android {
         jvmTarget = "17"
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.3"
+        kotlinCompilerExtensionVersion = "1.5.5"
     }
     packaging {
         resources {
@@ -69,14 +69,14 @@ dependencies {
     implementation("com.google.android.material:material:1.10.0")
 
     //Dagger hilt
-    implementation("com.google.dagger:hilt-android:2.48.1")
-    ksp("com.google.dagger:hilt-compiler:2.48.1")
+    implementation("com.google.dagger:hilt-android:2.49")
+    ksp("com.google.dagger:hilt-compiler:2.49")
     implementation("androidx.hilt:hilt-common:1.1.0")
     ksp("androidx.hilt:hilt-compiler:1.1.0")
 
     //Miscellaneous
     implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.activity:activity-ktx:1.8.0")
+    implementation("androidx.activity:activity-ktx:1.8.1")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.appcompat:appcompat:1.6.1")
