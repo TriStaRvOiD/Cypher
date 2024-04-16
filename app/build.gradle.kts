@@ -69,7 +69,7 @@ dependencies {
     implementation("com.google.android.material:material:1.11.0")
 
     //Dagger hilt
-    implementation("com.google.dagger:hilt-android:2.50")
+    implementation("com.google.dagger:hilt-android:2.51.1")
     ksp("com.google.dagger:hilt-compiler:2.50")
     implementation("androidx.hilt:hilt-common:1.1.0")
     ksp("androidx.hilt:hilt-compiler:1.1.0")
