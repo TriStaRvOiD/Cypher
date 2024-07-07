@@ -4,7 +4,7 @@
 A QR Scanning Application written in Kotlin
 </p>
 <p align="center">
-    <a href="https://play.google.com/">
+    <a href="https://play.google.com/store/apps/details?id=com.tristarvoid.qrscanner">
     <img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" width="240">
   </a>
 </p>
