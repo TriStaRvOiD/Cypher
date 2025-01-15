@@ -15,7 +15,6 @@ import android.content.Intent
 import android.view.GestureDetector
 import android.view.MotionEvent
 import androidx.camera.core.Camera
-import androidx.core.content.ContextCompat.startActivity
 import com.tristarvoid.qrscanner.FileActivity
 
 class GestureListener(private val context: Context, private val camera: Camera) :
@@ -35,7 +34,7 @@ class GestureListener(private val context: Context, private val camera: Camera) 
 
     override fun onDoubleTap(e: MotionEvent): Boolean {
         val intent = Intent(context, FileActivity::class.java)
-        startActivity(context, intent, null)
+        context.startActivity(intent, null)
         return super.onDoubleTap(e)
     }
 }

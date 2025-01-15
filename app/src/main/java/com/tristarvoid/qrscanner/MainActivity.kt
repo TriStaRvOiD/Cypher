@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity() {
             val preview = Preview.Builder()
                 .build()
                 .also { mPreview ->
-                    mPreview.setSurfaceProvider(binding.scanView.surfaceProvider)
+                    mPreview.surfaceProvider = binding.scanView.surfaceProvider
                 }
             val imageCapture = ImageCapture.Builder().build()
             val imageAnalyzer = ProxyAnalyzer(supportFragmentManager)
