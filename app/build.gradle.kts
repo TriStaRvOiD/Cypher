@@ -7,14 +7,14 @@ plugins {
 
 android {
     namespace = "com.tristarvoid.qrscanner"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.tristarvoid.qrscanner"
         minSdk = 24
-        targetSdk = 34
-        versionCode = 8
-        versionName = "2.0.6"
+        targetSdk = 35
+        versionCode = 9
+        versionName = "2.0.7"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
