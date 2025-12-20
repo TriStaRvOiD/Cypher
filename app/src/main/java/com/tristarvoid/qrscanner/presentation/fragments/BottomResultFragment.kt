@@ -11,12 +11,12 @@
 package com.tristarvoid.qrscanner.presentation.fragments
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tristarvoid.qrscanner.R
@@ -48,7 +48,7 @@ class BottomResultFragment : BottomSheetDialogFragment() {
         }
         binding.urlListView.setOnItemClickListener { _, _, position, _ ->
             val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse(items[position])
+            intent.data = items[position]?.toUri()
             startActivity(intent)
         }
         binding.urlListView.setOnItemLongClickListener { _, _, position, _ ->
