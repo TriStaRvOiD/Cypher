@@ -1,10 +1,12 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    dependencies {
+        classpath(libs.kotlin.gradle.plugin)
+    }
+}
+
 plugins {
-    id("com.android.application") version "8.13.2" apply false
-
-    id("org.jetbrains.kotlin.android") version "2.2.0" apply false
-
-    id("com.google.dagger.hilt.android") version "2.57.2" apply false
-
-    id("com.google.devtools.ksp") version "2.3.4" apply false
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.hilt) apply false
+    alias(libs.plugins.ksp) apply false
 }

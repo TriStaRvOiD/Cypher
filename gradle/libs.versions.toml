@@ -1,0 +1,59 @@
+[versions]
+agp = "9.2.1"
+kotlin = "2.4.0"
+ksp = "2.3.10"
+hilt = "2.60.1"
+androidxHilt = "1.4.0"
+
+mlkitBarcode = "17.3.0"
+camerax = "1.6.1"
+material = "1.14.0"
+coreKtx = "1.19.0"
+activityKtx = "1.13.0"
+lifecycle = "2.11.0"
+appcompat = "1.7.1"
+annotation = "1.10.0"
+cardview = "1.0.0"
+constraintlayout = "2.2.1"
+leakcanary = "2.14"
+
+junit = "4.13.2"
+androidxJunit = "1.3.0"
+espresso = "3.7.0"
+
+[libraries]
+kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+
+mlkit-barcode-scanning = { group = "com.google.mlkit", name = "barcode-scanning", version.ref = "mlkitBarcode" }
+
+camera-camera2 = { group = "androidx.camera", name = "camera-camera2", version.ref = "camerax" }
+camera-lifecycle = { group = "androidx.camera", name = "camera-lifecycle", version.ref = "camerax" }
+camera-video = { group = "androidx.camera", name = "camera-video", version.ref = "camerax" }
+camera-view = { group = "androidx.camera", name = "camera-view", version.ref = "camerax" }
+camera-extensions = { group = "androidx.camera", name = "camera-extensions", version.ref = "camerax" }
+
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
+androidx-hilt-common = { group = "androidx.hilt", name = "hilt-common", version.ref = "androidxHilt" }
+androidx-hilt-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "androidxHilt" }
+
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activityKtx" }
+lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle" }
+lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+annotation = { group = "androidx.annotation", name = "annotation", version.ref = "annotation" }
+cardview = { group = "androidx.cardview", name = "cardview", version.ref = "cardview" }
+constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+leakcanary-android = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakcanary" }
+
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxJunit" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
